@@ -1,5 +1,14 @@
 @extends('layout.master')
 @section('content')
+@push('script')
+  <script src="{{asset('/template/plugins/datatables/jquery.dataTables.js')}}"></script>
+  <script src="{{asset('/template/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+  <script>
+  $(function () {
+      $("#example1").DataTable();
+  });
+  </script>
+@endpush
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="page-header">
@@ -16,7 +25,8 @@
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Data Customer</h4>
-                <table class="table table-bordered">
+                <a href="{{route('customer.create')}}" class="mdi mdi-format-list-bulleted menu-icon btn btn-primary"> Tambah Data</a>
+                <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th> No </th>
@@ -27,7 +37,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="table-primary">
+                    <tr>
                       <td> 5 </td>
                       <td> Edward </td>
                       <td> Illustrator </td>

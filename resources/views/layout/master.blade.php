@@ -51,5 +51,6 @@
     <!-- Custom js for this page -->
     <script src="{{asset('/template/assets/js/dashboard.js')}}"></script>
     <!-- End custom js for this page -->
+    @stack('script')
   </body>
 </html>
