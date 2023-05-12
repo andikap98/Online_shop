@@ -101,7 +101,7 @@
       </li>
       <li class="nav-item sidebar-user-actions">
         <div class="sidebar-user-menu">
-          <a href="#" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
+          <a href="{{url('auth/logout')}}" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
             <span class="menu-title">Log Out</span></a>
         </div>
       </li>
