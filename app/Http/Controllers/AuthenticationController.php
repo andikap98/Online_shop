@@ -22,7 +22,17 @@ class AuthenticationController extends Controller
         if(Auth::attempt($data)){
             return redirect()->to('dashboard');
         }else{
-            return redirect()->back()->with('error', 'Email atau Password yang Anda Masukkan Salah');
+            $LoginErrors = Session::get('LoginErrors',0);
+            $LoginErrors++;
+            Session::put('LoginErrors' ,$LoginErrors);
+
+            if($LoginErrors>=3){    
+                return redirect()->back()->with('error', 'Terjadi Kesalahan Login 3 Kali Silahkan Hubungi Admin');
+            }
+            else{
+                return redirect()->back()->with('error', 'Email atau Password yang Anda Masukkan Salah');
+            }
+              
         }
     }
 

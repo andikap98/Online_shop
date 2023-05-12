@@ -22,9 +22,9 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pages/icons/mdi.html">
+        <a class="nav-link" href="{{route('customer.index')}}">
           <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
-          <span class="menu-title">Icons</span>
+          <span class="menu-title">Customer</span>
         </a>
       </li>
       <li class="nav-item">
