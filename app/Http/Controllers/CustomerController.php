@@ -65,7 +65,7 @@ class CustomerController extends Controller
     public function show($id)
     {
         $data = Customer::find($id);
-        return view('page.customer.create_customer')->with('data', $data);
+        return view('page.customer.detail_customer')->with('data', $data);
     }
 
     /**
@@ -76,7 +76,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Customer::find($id);
+        return view('page.customer.edit_customer')->with('data', $data);
     }
 
     /**
@@ -88,7 +89,35 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $message = [
+            'required' => 'Form tidak boleh kosong',
+            'max' => [
+                'telp'=> 'No Telepon yang anda masukan lebih dari 12',
+                'alamat'=> 'Alamat yang anda masukan terlalu panjang',
+            ],
+            'min' => 'No Telepon yang anda masukan kurang dari 12',
+            
+        ];
+        $request->validate([
+            'nama'=>'required',
+            'email'=>'required|email',
+            'telp'=>'required|min:10|max:12',
+            'alamat'=>'required|max:255',
+        ], $message);
+        $cekEmail = Customer::find($id);
+        // Jika email baru yang diinput tidak sama dengan email lama
+        if ($request->email != $cekEmail->email) {
+            // Mengecek apakah email baru sudah terdaftar atau belum
+            $isEmailExists = Customer::where('email', $request->email)->exists();
+            if ($isEmailExists) {
+                return redirect()->back()->withErrors(['email' => 'Email sudah terdaftar.'])->withInput();
+            }
+        }
+            $data = $request->except(['_token','_method']);
+            $data = Customer::where('id',$id)->update($data);
+            return redirect()->route('customer.index')->with('success','Data Customer Berhasil Diubah');
+
+        
     }
 
     /**
@@ -99,6 +128,7 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Customer::where('id',$id)->delete();
+        return redirect()->route('customer.index')->with('success','Data Customer Berhasil Dihapus');
     }
 }
