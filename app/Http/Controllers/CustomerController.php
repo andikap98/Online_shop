@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -13,8 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        
-            return view('page.customer.index');
+            $data = Customer::all();
+            return view('page.customer.index')->with('data', $data);
     }
 
     /**
@@ -24,7 +25,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.customer.create_customer');
     }
 
     /**
@@ -35,7 +36,24 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = [
+            'required' => 'Form tidak boleh kosong',
+            'max' => [
+                'telp'=> 'No Telepon yang anda masukan lebih dari 12',
+                'alamat'=> 'Alamat yang anda masukan terlalu panjang',
+            ],
+            'min' => 'No Telepon yang anda masukan kurang dari 12',
+            'unique' => 'Email yang anda masukan sudah terdaftar'
+            
+        ];
+        $request->validate([
+            'nama'=>'required',
+            'email'=>'required|email|unique:customer,email',
+            'telp'=>'required|min:10|max:12',
+            'alamat'=>'required|max:255',
+        ], $message);
+        $data = Customer::create($request->all());
+        return redirect()->route('customer.index')->with('success','Data Customer Berhasil Ditambahkan');
     }
 
     /**
@@ -46,7 +64,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Customer::find($id);
+        return view('page.customer.create_customer')->with('data', $data);
     }
 
     /**

@@ -28,7 +28,7 @@
               <div class="auth-form-light text-left p-5">
                 @if (Session::has('error'))
                     <div class="alert alert-danger">
-                      {{Session::get('error')}}
+                      {!! Session::get('error') !!}
                     </div>
                 @endif
                 <div class="brand-logo">

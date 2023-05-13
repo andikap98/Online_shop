@@ -27,7 +27,7 @@ class AuthenticationController extends Controller
             Session::put('LoginErrors' ,$LoginErrors);
 
             if($LoginErrors>=3){    
-                return redirect()->back()->with('error', 'Terjadi Kesalahan Login 3 Kali Silahkan Hubungi Admin');
+                return redirect()->back()->with('error', 'Terjadi Kesalahan Login 3 Kali Silahkan <a href="#">Hubungi Admin</a>')->withInput();
             }
             else{
                 return redirect()->back()->with('error', 'Email atau Password yang Anda Masukkan Salah');

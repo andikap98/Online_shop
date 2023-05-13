@@ -25,6 +25,11 @@
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Data Customer</h4>
+                @if (session('success'))
+                <div class="alert alert-success">
+                  {{session('success')}}
+                </div>   
+                @endif
                 <a href="{{route('customer.create')}}" class="mdi mdi-format-list-bulleted menu-icon btn btn-primary"> Tambah Data</a>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
@@ -33,17 +38,27 @@
                       <th> Nama </th>
                       <th> Email </th>
                       <th> No Telp </th>
-                      <th> Aksi </th>
+                      <th class="col-3"> Aksi </th>
                     </tr>
                   </thead>
                   <tbody>
+                    <?php $i=1 ?>
+                    @foreach ($data as $item)
                     <tr>
-                      <td> 5 </td>
-                      <td> Edward </td>
-                      <td> Illustrator </td>
-                      <td> $ 160.25 </td>
-                      <td> May 03, 2015 </td>
+                      <td> {{$i++}} </td>
+                      <td> {{$item->nama}} </td>
+                      <td> {{$item->email}} </td>
+                      <td> {{$item->telp}} </td>
+                      <td><a href="{{route('customer.edit', $item->id)}}" class=" btn btn-sm btn btn-warning">Update</a>
+                        <a href="{{route('customer.show', $item->id)}}" class=" btn btn-sm btn btn-info">Detail</a>
+                        <form onsubmit="return confirm('Yakin mau untuk menghapus data ini?')" action="{{route('customer.destroy', $item->id)}}" class="d-inline" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <button class="btn btn-sm btn-danger" type="submit" name="submit">Delete</button>
+                        </form>
+                      </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
