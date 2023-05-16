@@ -28,9 +28,9 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pages/forms/basic_elements.html">
-          <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
-          <span class="menu-title">Forms</span>
+        <a class="nav-link" href="{{route('produk.index')}}">
+          <span class="icon-bg"><i class="mdi mdi-table-large menu-icon"></i></span>
+          <span class="menu-title">Produk</span>
         </a>
       </li>
       <li class="nav-item">

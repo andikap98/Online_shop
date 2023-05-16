@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\ProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::prefix('')->middleware('auth')->group(
     function(){
         Route::get('/dashboard', [DashboardController::class,'index']);
         Route::resource('customer', CustomerController::class);
+        Route::resource('produk', ProdukController::class);
 
     }
 );
