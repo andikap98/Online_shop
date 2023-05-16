@@ -29,15 +29,15 @@
                 @csrf
                 <div class="form-group">
                   <label for="exampleInputName1">Nama Produk</label>
-                  <input type="text" class="form-control" name="nama_produk" id="exampleInputName1" placeholder="Masukan Nama Produk">
+                  <input type="text" class="form-control" name="nama_produk" id="exampleInputName1" value="{{old('nama_produk')}}" placeholder="Masukan Nama Produk" >
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail3">Harga Produk</label>
-                  <input type="text" class="form-control" name="harga_produk" id="exampleInputEmail3" placeholder="Masukan Harga Produk">
+                  <input type="text" class="form-control" name="harga_produk" id="exampleInputEmail3" value="{{old('harga_produk')}}" placeholder="Masukan Harga Produk">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword4">Stok Produk</label>
-                  <input type="number" class="form-control" name="stok" id="exampleInputPassword4" placeholder="Masukan Stok Produk">
+                  <input type="number" class="form-control" name="stok" id="exampleInputPassword4" value="{{old('Stok')}}" placeholder="Masukan Stok Produk">
                 </div>
                 <div class="form-group">
                   <label for="exampleFormControlFile1">Example file input</label>
@@ -45,10 +45,10 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleTextarea1">Deskripsi</label>
-                  <textarea class="form-control" name="deskripsi" id="exampleTextarea1" rows="4" placeholder="Masukan Deskripsi Produk"></textarea>
+                  <textarea class="form-control" name="deskripsi" id="exampleTextarea1" rows="4" value="{{old('Deskripsi')}}" placeholder="Masukan Deskripsi Produk"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                <a href="{{route('customer.index')}}" class="btn btn-light">Cancel</a>
+                <a href="{{route('produk.index')}}" class="btn btn-light">Cancel</a>
               </form>
             </div>
           </div>

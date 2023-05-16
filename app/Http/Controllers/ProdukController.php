@@ -80,7 +80,9 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Produk::find($id);
+        return view('page.produk.detail_produk')->with('data', $data);
+
     }
 
     /**
@@ -91,7 +93,9 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $data = Produk::find($id);
+        return view('page.produk.update_produk')->with('data', $data);
     }
 
     /**
@@ -103,9 +107,39 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $request->validate([
+            'nama_produk'=>'required',
+            'harga_produk'=>'required',
+            'stok'=>'required',
+            'foto_produk'=>'required',
+            'deskripsi'=> 'required',
 
+        ]);
+        
+        
+        if($request->hasFile('foto_produk')){
+            $file = $request->file('foto_produk');
+            $filename = time().'-'.$file->getClientOriginalName();
+            $file->move(public_path('image'), $filename);
+        }else{
+            $filename = null;
+        }
+
+        $data=[
+            'nama_produk' => $request->nama_produk,
+            'harga_produk' => $request->harga_produk,
+            'stok' => $request->stok,
+            'foto_produk' => $filename,
+            'deskripsi' => $request->deskripsi,
+
+        ]; 
+        if($filename === null){
+            return redirect()->back()->withErrors(['foto_produk'=>'Foto harus diunggah']);
+        }
+         
+         Produk::create($data);
+            return redirect()->route('produk.index')->with('success','Data Berhasil Ditambahkan');
+        }
     /**
      * Remove the specified resource from storage.
      *
