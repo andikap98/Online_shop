@@ -12,4 +12,8 @@ class Produk extends Model
     protected $table = 'produk';
     protected $primarykey = 'id';
     protected $fillable = ['nama_produk','harga_produk','stok','deskripsi','foto_produk']; 
+
+    public function pemesanan(){
+        return $this->belongsToMany(Pemesanan::class);
+    }
 }
