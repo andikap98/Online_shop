@@ -103,8 +103,7 @@
                     $('#nama').val(response.nama);
                     $('#telp').val(response.telp);
                   } else {
-                      $('#nama').val('');
-                      $('#telp').val('');
+                      alert('Data tidak ditemukan!!');
                   }
               }
           });

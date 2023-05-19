@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('pemesanan', function (Blueprint $table) {
-            $table->string('kode_pemesanan');
+            $table->dropColumn('total_harga');
         });
     }
 

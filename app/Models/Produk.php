@@ -14,6 +14,6 @@ class Produk extends Model
     protected $fillable = ['nama_produk','harga_produk','stok','deskripsi','foto_produk']; 
 
     public function pemesanan(){
-        return $this->belongsToMany(Pemesanan::class);
+        return $this->hasMany(Pemesanan::class, 'id_produk');
     }
 }

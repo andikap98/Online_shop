@@ -12,4 +12,9 @@ class Customer extends Model
     protected $table = 'customer';
     protected $primarykey = 'id';
     protected $fillable = ['nama','email','telp','alamat'];
+
+    public function pemesanan(){
+
+        return $this->hasMany(Pemesanan::class, 'id_customer');
+    }
 }

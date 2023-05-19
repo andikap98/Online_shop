@@ -1,4 +1,4 @@
-{{-- @extends('layout.master')
+@extends('layout.master')
 @section('content')
 @extends('layout.master')
 @section('content')
@@ -37,9 +37,9 @@
                   <thead>
                     <tr>
                       <th> No </th>
-                      <th> Nama Pemesan</th>
-                      <th> Barang pesanan </th>
-                      <th> Total Harga</th>
+                      <th> Kode Pemesanan</th>
+                      <th> Nama Customer</th>
+                      <th> Nama Produk</th>
                       <th> Tanggal Pemesanan</th>
                       <th class="col-2"><center>Aksi</center></th>
                     </tr>
@@ -49,10 +49,10 @@
                     @foreach ($data as $item)
                     <tr>
                       <td> {{$i++}} </td>
-                      <td> {{$item->nama_pemesanan}} </td>
+                      <td> {{$item->kode_pemesanan}} </td>
+                      <td> {{$item->nama}} </td>
                       <td> {{$item->nama_produk}} </td>
-                      <td> {{$item->create}} </td>
-                      <td> {{$item->harga_pemesanan}} </td>
+                      <td> {{$item->created_at}} </td>
                       <td><a href="{{route('pemesanan.edit', $item->id)}}" class=" btn btn-sm btn btn-warning">Update</a>
                         <a href="{{route('pemesanan.show', $item->id)}}" class=" btn btn-sm btn btn-info">Detail</a>
                         <form onsubmit="return confirm('Yakin mau untuk menghapus data ini?')" action="{{route('pemesanan.destroy', $item->id)}}" class="d-inline" method="POST">
@@ -83,4 +83,4 @@
       <!-- partial -->
     </div>
 @endsection
-@endsection --}}
+@endsection
