@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CustomerController;
+use App\Models\Produk;
 
 class PemesananController extends Controller
 {
@@ -26,7 +27,8 @@ class PemesananController extends Controller
      */
     public function create()
     {
-        return view('page.pemesanan.create_pemesanan');
+        $data = Produk::all();
+        return view('page.pemesanan.create_pemesanan')->with('data', $data);
     }
 
     /**
@@ -37,7 +39,17 @@ class PemesananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'kode_pemesanan' => $request->kode_pemesanan,
+            'id_customer' => $request->id_customer,
+            'id_produk' => $request->id_produk,
+            'jumlah_beli' => $request->jumlah_beli,
+            'jumlah_harga' => $request->jumlah_harga,
+
+        ];
+
+        Pemesanan::create($data);
+        return redirect()->route('pemesanan.create')->with('success','Data Pemesanan Berhasil Ditambahkan');
     }
 
     /**
