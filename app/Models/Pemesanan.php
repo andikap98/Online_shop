@@ -12,11 +12,11 @@ class Pemesanan extends Model
     protected $table='pemesanan';
     protected $fillable = ['kode_pemesanan','id_produk','id_customer','jumlah_beli','jumlah_harga','total_harga'];
 
-    public function customer(){
-        return $this->belongsTo(Customer::class, 'id');
-    }
-
-    public function produk(){
-        return $this->belongsTo(Produk::class, 'id');
-    }
+        public function produk() {
+            return $this->belongsTo(Produk::class);
+        }
+    
+        public function customer() {
+            return $this->belongsTo(Customer::class);
+        }
 }

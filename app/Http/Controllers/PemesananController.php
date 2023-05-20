@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use App\Models\Customer;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
-use App\Models\Produk;
+use Illuminate\Support\Facades\DB;
 
 class PemesananController extends Controller
 {
@@ -16,9 +17,13 @@ class PemesananController extends Controller
      */
     public function index()
     {
-        $customer = Customer::with('pemesanan')->get();
-        $produk =  Produk::with('pemesanan')->get();
-        $data = $customer->union($produk);
+        $data = DB::table('pemesanan')
+        ->join('produk', 'produk.id', '=', 'pemesanan.id_produk')
+        ->join('customer', 'customer.id', '=', 'pemesanan.id_customer')
+        ->select('produk.*', 'pemesanan.*', 'customer.*')
+        ->get();
+
+        
         return view('page.pemesanan.index')->with('data', $data);
     }
 
@@ -50,7 +55,7 @@ class PemesananController extends Controller
 
         ];
         Pemesanan::create($data);
-        return redirect()->route('pemesanan.create')->with('success','Data Pemesanan Berhasil Ditambahkan');
+        return redirect()->route('pemesanan.index')->with('success','Data Pemesanan Berhasil Ditambahkan');
     }
 
     /**

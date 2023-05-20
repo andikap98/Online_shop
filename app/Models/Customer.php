@@ -13,8 +13,7 @@ class Customer extends Model
     protected $primarykey = 'id';
     protected $fillable = ['nama','email','telp','alamat'];
 
-    public function pemesanan(){
-
-        return $this->hasMany(Pemesanan::class, 'id_customer');
+    public function pemesanan() {
+        return $this->hasMany(Pemesanan::class);
     }
 }

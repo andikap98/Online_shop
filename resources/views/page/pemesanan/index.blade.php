@@ -52,7 +52,7 @@
                       <td> {{$item->kode_pemesanan}} </td>
                       <td> {{$item->nama}} </td>
                       <td> {{$item->nama_produk}} </td>
-                      <td> {{$item->created_at}} </td>
+                      <td> {{$item->tanggal_pemesanan}} </td>
                       <td><a href="{{route('pemesanan.edit', $item->id)}}" class=" btn btn-sm btn btn-warning">Update</a>
                         <a href="{{route('pemesanan.show', $item->id)}}" class=" btn btn-sm btn btn-info">Detail</a>
                         <form onsubmit="return confirm('Yakin mau untuk menghapus data ini?')" action="{{route('pemesanan.destroy', $item->id)}}" class="d-inline" method="POST">
